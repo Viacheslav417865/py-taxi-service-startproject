@@ -19,9 +19,11 @@ class Driver(AbstractUser):
 
 
 class Car(models.Model):
-    license_number = models.CharField(max_length=100, unique=True, null=True)
-    manufacturer_name = models.CharField(max_length=100, null=True)
+    license_number = models.CharField(max_length=100, null=False,
+                                      unique=True, default="default_license_number")
+    manufacturer_name = models.CharField(max_length=100,
+                                         null=False, default="default_manufacturer")
     driver = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
-        return self.model
+        return self.license_number
